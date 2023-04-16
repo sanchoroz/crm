@@ -1,33 +1,20 @@
-name: Build and Test
+name: Node.js CI
 
-on:
-  push:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: npm install && npm install --prefix ./server && npm install --prefix ./client
+      - name: Install client dependencies
+        working-directory: ./client
+        run: |
+          npm install
 
-      - name: Build Client
-        run: npm run build --prefix ./client
-
-  start-server:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install Dependencies
-        run: npm install --prefix ./server
-
-      - name: Start Server
-        run: npm start --prefix ./server
+      - name: Install server dependencies
+        working-directory: ./server
+        run: |
+          npm install
