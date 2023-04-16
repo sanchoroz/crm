@@ -14,10 +14,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: npm install --prefix client
+        run: npm install --prefix ./client
 
       - name: Build Client
-        run: npm run build --prefix client
+        run: npm run build --prefix ./client
 
   start-server:
     runs-on: ubuntu-latest
@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install Dependencies
-        run: npm install --prefix server
+        run: npm install --prefix ./server
 
       - name: Start Server
-        run: npm start --prefix server
+        run: npm start --prefix ./server
